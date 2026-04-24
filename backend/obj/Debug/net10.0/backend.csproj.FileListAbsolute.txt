@@ -34,3 +34,12 @@
 /Users/andersbellsundbeil/Desktop/KodeGym/CSharp/Deloitte/backend/bin/Debug/net10.0/Swashbuckle.AspNetCore.Swagger.dll
 /Users/andersbellsundbeil/Desktop/KodeGym/CSharp/Deloitte/backend/bin/Debug/net10.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /Users/andersbellsundbeil/Desktop/KodeGym/CSharp/Deloitte/backend/bin/Debug/net10.0/Swashbuckle.AspNetCore.SwaggerUI.dll
+/Users/andersbellsundbeil/Desktop/KodeGym/CSharp/Deloitte/backend/bin/Debug/net10.0/ClosedXML.dll
+/Users/andersbellsundbeil/Desktop/KodeGym/CSharp/Deloitte/backend/bin/Debug/net10.0/ClosedXML.Parser.dll
+/Users/andersbellsundbeil/Desktop/KodeGym/CSharp/Deloitte/backend/bin/Debug/net10.0/DocumentFormat.OpenXml.dll
+/Users/andersbellsundbeil/Desktop/KodeGym/CSharp/Deloitte/backend/bin/Debug/net10.0/DocumentFormat.OpenXml.Framework.dll
+/Users/andersbellsundbeil/Desktop/KodeGym/CSharp/Deloitte/backend/bin/Debug/net10.0/ExcelNumberFormat.dll
+/Users/andersbellsundbeil/Desktop/KodeGym/CSharp/Deloitte/backend/bin/Debug/net10.0/RBush.dll
+/Users/andersbellsundbeil/Desktop/KodeGym/CSharp/Deloitte/backend/bin/Debug/net10.0/SixLabors.Fonts.dll
+/Users/andersbellsundbeil/Desktop/KodeGym/CSharp/Deloitte/backend/bin/Debug/net10.0/System.IO.Packaging.dll
+/Users/andersbellsundbeil/Desktop/KodeGym/CSharp/Deloitte/backend/obj/Debug/net10.0/backend.sourcelink.json
