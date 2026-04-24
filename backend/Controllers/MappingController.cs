@@ -8,12 +8,13 @@ namespace backend.Controllers;
 public class MappingController : ControllerBase
 {
 
-    private readonly ExcelParserService _excelParserService;
+    private readonly ExcelParserService _excelParserService = new ExcelParserService();
+    private readonly MappingService _mappingService = new MappingService();
 
-    public MappingController()
-    {
-        _excelParserService = new ExcelParserService();
-}
+   // public MappingController()
+   // {
+   //     _excelParserService = new ExcelParserService();
+   // }
 
 
     [HttpPost]
@@ -28,8 +29,8 @@ public class MappingController : ControllerBase
 
         var accounts = _excelParserService.ParseAccounts(stream);
 
-
-        return Ok(accounts);
+        var mappings = _mappingService.GenerateMappings(accounts);
+        return Ok(mappings);
    
     }
 }
