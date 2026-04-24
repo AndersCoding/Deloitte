@@ -1,3 +1,4 @@
+using backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers;
@@ -6,18 +7,29 @@ namespace backend.Controllers;
 [Route("api/[controller]")]
 public class MappingController : ControllerBase
 {
+
+    private readonly ExcelParserService _excelParserService;
+
+    public MappingController()
+    {
+        _excelParserService = new ExcelParserService();
+}
+
+
     [HttpPost]
-    public async Task<IActionResult> UploadTrialBalance(IFormFile file)
+    public async Task<IActionResult> Upload(IFormFile file)
     {
         if (file == null || file.Length == 0)
         {
             return BadRequest("No file uploaded.");
         }
-        return Ok(new
-        {
-            fileName = file.FileName,
-            fileSize = file.Length,
-            message = "File received successfully."
-        });
+
+        using var stream = file.OpenReadStream();
+
+        var accounts = _excelParserService.ParseAccounts(stream);
+
+
+        return Ok(accounts);
+   
     }
 }
