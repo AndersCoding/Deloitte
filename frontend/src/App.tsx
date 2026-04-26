@@ -11,8 +11,7 @@ interface Accounts {
   suggestedStandardAccountName: string;
   confidence: number;
   status: string;
-  suggeestedCategory: string;
-
+  suggestedCategory: string;
 }
 function App() {
 
@@ -38,7 +37,34 @@ function App() {
       <InfoBox />
       <section id="center">
         <h3>AI-accounted mapping</h3>
-       
+        {accounts.map((account, index) => (
+          <div key={index} className="account-card">
+            <p>
+              <strong>Source Account Number:</strong>{" "}
+              {account.sourceAccountNumber}
+            </p>
+            <p>
+              <strong>Source Account Name:</strong> {account.sourceAccountName}
+            </p>
+            <p>
+              <strong>Suggested Standard Account Number:</strong>{" "}
+              {account.suggestedStandardAccountNumber}
+            </p>
+            <p>
+              <strong>Suggested Standard Account Name:</strong>{" "}
+              {account.suggestedStandardAccountName}
+            </p>
+            <p>
+              <strong>Confidence:</strong> {account.confidence}
+            </p>
+            <p>
+              <strong>Status:</strong> {account.status}
+            </p>
+            <p>
+              <strong>Suggested Category:</strong> {account.suggestedCategory}
+            </p>
+          </div>
+        ))}
       </section>
     </>
   );

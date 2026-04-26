@@ -6,7 +6,18 @@ builder.Services.AddOpenApi();
 // 1. Add Swagger services to the container
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer(); // Required for discovering endpoints
-builder.Services.AddSwaggerGen();  
+builder.Services.AddSwaggerGen();
+
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -19,6 +30,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowAll");
+
 app.MapControllers();
 
 
