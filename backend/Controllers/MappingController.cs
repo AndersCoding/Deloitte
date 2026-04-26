@@ -1,3 +1,4 @@
+using backend.Models;
 using backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +12,13 @@ public class MappingController : ControllerBase
     private readonly ExcelParserService _excelParserService = new ExcelParserService();
     private readonly MappingService _mappingService = new MappingService();
 
-   // public MappingController()
-   // {
-   //     _excelParserService = new ExcelParserService();
-   // }
+    // Store data
+    private static List<MappingSuggestions> _latestMappings = new();
+
+    // public MappingController()
+    // {
+    //     _excelParserService = new ExcelParserService();
+    // }
 
 
     [HttpPost]
@@ -30,7 +34,17 @@ public class MappingController : ControllerBase
         var accounts = _excelParserService.ParseAccounts(stream);
 
         var mappings = _mappingService.GenerateMappings(accounts);
+
+            _latestMappings = mappings;
         return Ok(mappings);
-   
+
     }
+
+    // Get data
+    [HttpGet]
+    public IActionResult GetLatestMappings()
+    {
+        return Ok(_latestMappings);
+    }
+
 }
