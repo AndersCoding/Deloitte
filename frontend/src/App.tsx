@@ -8,6 +8,17 @@ interface Movie {
   title: string;
   episode_id: number;
 }
+
+interface Accounts {
+  sourceAccountNumber: string;
+  sourceAccountName: string;
+  suggestedStandardAccountNumber: string;
+  suggestedStandardAccountName: string;
+  confidence: number;
+  status: string;
+  suggeestedCategory: string;
+
+}
 function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
 
