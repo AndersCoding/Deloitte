@@ -2,12 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import InfoBox from "./Components/InfoBox";
 import axios from "axios";
-import SearchMovie from "./Components/SearchMovie";
 
-interface Movie {
-  title: string;
-  episode_id: number;
-}
 
 interface Accounts {
   sourceAccountNumber: string;
@@ -20,14 +15,17 @@ interface Accounts {
 
 }
 function App() {
-  const [movies, setMovies] = useState<Movie[]>([]);
+
+  const [accounts, setAccounts] = useState<Accounts[]>([]);
 
   // Fetch movies
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get("https://swapi.info/api/films/");
-        setMovies(response.data);
+        const response = await axios.get("http://localhost:5272/api/Mapping/");
+        setAccounts(response.data);
+        console.log(accounts)
+        console.log(response.data)
       } catch (error) {
         console.error("Error fetching movies:", error);
       }
@@ -39,8 +37,8 @@ function App() {
     <>
       <InfoBox />
       <section id="center">
-        <h3>Deloitte Account</h3>
-        <SearchMovie movies={movies} />
+        <h3>AI-accounted mapping</h3>
+       
       </section>
     </>
   );
