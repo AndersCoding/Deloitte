@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import InfoBox from "./Components/InfoBox";
 import MappingTable from "./Components/MappingTable";
 import { getMappings } from "./services/mappingService";
 import type { Mapping } from "./types/Mapping";
@@ -28,32 +27,64 @@ const standardAccounts = [
     accountName: "Kundefordringer",
     category: "Omløpsmidler",
   },
+  {
+    accountNumber: "1000",
+    accountName: "Forskning og utvikling",
+    category: "Anleggsmidler",
+  },
+  {
+    accountNumber: "1070",
+    accountName: "Utsatt skattefordel",
+    category: "Anleggsmidler",
+  },
+  { accountNumber: "1230", accountName: "Biler", category: "Driftsmidler" },
+  { accountNumber: "1270", accountName: "Verktøy", category: "Driftsmidler" },
+  {
+    accountNumber: "2000",
+    accountName: "Aksjekapital",
+    category: "Egenkapital",
+  },
+  {
+    accountNumber: "2050",
+    accountName: "Annen egenkapital",
+    category: "Egenkapital",
+  },
+  {
+    accountNumber: "2930",
+    accountName: "Skyldig lønn",
+    category: "Kortsiktig gjeld",
+  },
+  {
+    accountNumber: "2940",
+    accountName: "Skyldige feriepenger",
+    category: "Kortsiktig gjeld",
+  },
 ];
-
 
 function App() {
 
   const [mappings, setMappings] = useState<Mapping[]>([]);
 
-  function updateMapping(index: number, selectedAccountNumber: string) {
-    const selectedAccount = standardAccounts.find(
-      (account) => account.accountNumber === selectedAccountNumber
-    );
+ function updateMapping(index: number, selectedAccountNumber: string) {
+   const selectedAccount = standardAccounts.find(
+     (account) => account.accountNumber === selectedAccountNumber
+   );
 
-    if (!selectedAccount) return;
+   if (!selectedAccount) return;
 
-    const updatedMappings = [...mappings];
+   const updatedMappings = [...mappings];
+   const currentMapping = updatedMappings[index];
 
-    updatedMappings[index] = {
-      ...updatedMappings[index],
-      suggestedStandardAccountNumber: selectedAccount.accountNumber,
-      suggestedStandardAccountName: selectedAccount.accountName,
-      suggestedCategory: selectedAccount.category,
-      status: "Edited",
-    };
+   updatedMappings[index] = {
+     ...currentMapping,
+     suggestedStandardAccountNumber: selectedAccount.accountNumber,
+     suggestedStandardAccountName: selectedAccount.accountName,
+     suggestedCategory: selectedAccount.category,
+     status: "Edited",
+   };
 
-    setMappings(updatedMappings);
-  }
+   setMappings(updatedMappings);
+ }
 
   // Fetch movies
   useEffect(() => {
@@ -73,10 +104,9 @@ function App() {
 
   return (
     <>
-      <InfoBox />
       <section id="center">
         <main>
-          <h1>AI-assisted account mapping</h1>
+          <h1>Deloitte Case</h1>
 
           <MappingTable
             mappings={mappings}
