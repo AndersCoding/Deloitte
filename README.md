@@ -88,6 +88,9 @@ npm install
 npm run dev
 press "o" to open in browser
 ```
+<img width="1136" height="459" alt="Skjermbilde 2026-04-27 kl  23 26 25" src="https://github.com/user-attachments/assets/df57ba0e-3009-4690-a0e1-8e2e4d3c6a06" />
+
+
 ----------
 
 ## 👨‍💻 **Author**
