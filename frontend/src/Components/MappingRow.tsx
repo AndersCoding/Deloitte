@@ -24,13 +24,10 @@ function MappingRow({
 }: Props) {
   return (
     <tr>
-      {/* Original */}
       <td>{mapping.sourceAccountNumber}</td>
 
-      {/* Source name */}
       <td>{mapping.sourceAccountName}</td>
 
-      {/* 🔥 Editable suggested mapping */}
       <td>
         <select
           value={mapping.suggestedStandardAccountNumber}
@@ -44,20 +41,32 @@ function MappingRow({
         </select>
       </td>
 
-      {/* Category */}
       <td>{mapping.suggestedCategory}</td>
 
-      {/* Confidence */}
       <td>
         <ConfidenceBadge confidence={mapping.confidence} />
       </td>
 
-      {/* Status */}
-      <td>{mapping.status}</td>
-
-      {/* Actions */}
       <td>
-        <button onClick={() => onConfirm(index)}>Confirm</button>
+        <span style={{
+            color:
+              mapping.status === "Confirmed"
+                ? "green"
+                : mapping.status === "Edited"
+                ? "orange"
+                : "gray",
+          }}>
+          {mapping.status}
+        </span>
+      </td>
+
+      <td>
+        <button
+          onClick={() => onConfirm(index)}
+          disabled={mapping.status === "Confirmed"}
+        >
+          {mapping.status === "Confirmed" ? "Confirmed" : "Confirm"}
+        </button>
       </td>
     </tr>
   );
