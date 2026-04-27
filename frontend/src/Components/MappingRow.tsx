@@ -48,14 +48,16 @@ function MappingRow({
       </td>
 
       <td>
-        <span style={{
+        <span
+          style={{
             color:
               mapping.status === "Confirmed"
                 ? "green"
                 : mapping.status === "Edited"
                 ? "orange"
                 : "gray",
-          }}>
+          }}
+        >
           {mapping.status}
         </span>
       </td>
