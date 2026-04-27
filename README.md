@@ -79,6 +79,8 @@ dotnet run
 3. Use POST /api/Mapping to upload Excel file (accountname and accountnumber)
 4. Open frontend to view results
 ```
+<img width="1153" height="433" alt="Skjermbilde 2026-04-27 kl  23 24 15" src="https://github.com/user-attachments/assets/da9a9614-2d4f-4ecd-995d-2b49bcb31cc1" />
+
 ### Frontend
 ```
 cd frontend  
