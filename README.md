@@ -65,6 +65,8 @@ User can:
 
 ## 🚀 Run the project
 
+### Download file "Saldobalanse - Eksempel til case.xlsx" from repository - used in Swagger as told below
+
 ### Backend
 ```
 cd backend  
