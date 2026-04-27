@@ -1,25 +1,61 @@
-import React from 'react'
-import type { Mapping } from '../types/Mapping'
-import ConfidenceBadge from './ConfidenceBadge'
+import type { Mapping } from "../types/Mapping";
+import ConfidenceBadge from "./ConfidenceBadge";
+
+type StandardAccount = {
+  accountNumber: string;
+  accountName: string;
+  category: string;
+};
 
 type Props = {
-    mapping: Mapping;
-    index: number;
-    onConfirm: (index: number) => void;
-}
+  mapping: Mapping;
+  index: number;
+  standardAccounts: StandardAccount[];
+  onConfirm: (index: number) => void;
+  onUpdate: (index: number, selectedAccountNumber: string) => void;
+};
 
-function MappingRow({mapping, index, onConfirm}: Props) {
+function MappingRow({
+  mapping,
+  index,
+  standardAccounts,
+  onConfirm,
+  onUpdate,
+}: Props) {
   return (
     <tr>
+      {/* Original */}
       <td>{mapping.sourceAccountNumber}</td>
+
+      {/* Source name */}
       <td>{mapping.sourceAccountName}</td>
-      <td>{mapping.suggestedStandardAccountNumber}</td>
-      <td>{mapping.suggestedStandardAccountName}</td>
+
+      {/* 🔥 Editable suggested mapping */}
+      <td>
+        <select
+          value={mapping.suggestedStandardAccountNumber}
+          onChange={(e) => onUpdate(index, e.target.value)}
+        >
+          {standardAccounts.map((account) => (
+            <option key={account.accountNumber} value={account.accountNumber}>
+              {account.accountNumber} - {account.accountName}
+            </option>
+          ))}
+        </select>
+      </td>
+
+      {/* Category */}
+      <td>{mapping.suggestedCategory}</td>
+
+      {/* Confidence */}
       <td>
         <ConfidenceBadge confidence={mapping.confidence} />
       </td>
+
+      {/* Status */}
       <td>{mapping.status}</td>
-      <td>{mapping.suggestedCategory}</td>
+
+      {/* Actions */}
       <td>
         <button onClick={() => onConfirm(index)}>Confirm</button>
       </td>
