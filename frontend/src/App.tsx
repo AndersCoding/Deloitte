@@ -4,6 +4,14 @@ import MappingTable from "./Components/MappingTable";
 import { getMappings } from "./services/mappingService";
 import type { Mapping } from "./types/Mapping";
 
+type AiSuggestion = {
+  suggestedStandardAccountNumber: string;
+  suggestedStandardAccountName: string;
+  suggestedCategory: string;
+  confidence: number;
+  reason: string;
+};
+
 const standardAccounts = [
   { accountNumber: "1920", accountName: "Bank", category: "Omløpsmidler" },
   { accountNumber: "5000", accountName: "Lønn", category: "Lønn" },
@@ -102,6 +110,20 @@ function App() {
     setMappings(updatedMappings);
   }
 
+function applyAiSuggestion(index: number, suggestion: AiSuggestion) {
+  const updatedMappings = [...mappings];
+
+  updatedMappings[index] = {
+    ...updatedMappings[index],
+    suggestedStandardAccountNumber: suggestion.suggestedStandardAccountNumber,
+    suggestedStandardAccountName: suggestion.suggestedStandardAccountName,
+    suggestedCategory: suggestion.suggestedCategory,
+    confidence: suggestion.confidence,
+    status: "Suggested",
+  };
+
+  setMappings(updatedMappings);
+}
   return (
     <>
       <section id="center">
@@ -113,6 +135,7 @@ function App() {
             standardAccounts={standardAccounts}
             onConfirm={confirmMapping}
             onUpdate={updateMapping}
+              onAiSuggestion={applyAiSuggestion}
           />
         </main>
       </section>

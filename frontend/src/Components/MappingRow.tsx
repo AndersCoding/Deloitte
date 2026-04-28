@@ -1,10 +1,17 @@
 import type { Mapping } from "../types/Mapping";
 import ConfidenceBadge from "./ConfidenceBadge";
+import AiSuggestButton from "./AiSugg";
 
 type StandardAccount = {
   accountNumber: string;
   accountName: string;
   category: string;
+};
+type AiSuggestion = {
+  suggestedStandardAccountNumber: string;
+  suggestedStandardAccountName: string;
+  suggestedCategory: string;
+  confidence: number;
 };
 
 type Props = {
@@ -13,6 +20,7 @@ type Props = {
   standardAccounts: StandardAccount[];
   onConfirm: (index: number) => void;
   onUpdate: (index: number, selectedAccountNumber: string) => void;
+  onAiSuggestion: (index: number, suggestion: AiSuggestion) => void;
 };
 
 function MappingRow({
@@ -21,6 +29,7 @@ function MappingRow({
   standardAccounts,
   onConfirm,
   onUpdate,
+  onAiSuggestion,
 }: Props) {
   return (
     <tr>
@@ -69,6 +78,13 @@ function MappingRow({
         >
           {mapping.status === "Confirmed" ? "Confirmed" : "Confirm"}
         </button>
+        <AiSuggestButton
+          sourceAccountNumber={mapping.sourceAccountNumber}
+          sourceAccountName={mapping.sourceAccountName}
+          onSuggestionApplied={(suggestion) =>
+            onAiSuggestion(index, suggestion)
+          }
+        />
       </td>
     </tr>
   );
