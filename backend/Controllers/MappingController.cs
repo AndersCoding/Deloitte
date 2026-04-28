@@ -15,12 +15,7 @@ public class MappingController : ControllerBase
     // Store data
     private static List<MappingSuggestions> _latestMappings = new();
 
-    // public MappingController()
-    // {
-    //     _excelParserService = new ExcelParserService();
-    // }
-
-
+    // Post excel-file
     [HttpPost]
     public async Task<IActionResult> Upload(IFormFile file)
     {
@@ -35,12 +30,13 @@ public class MappingController : ControllerBase
 
         var mappings = _mappingService.GenerateMappings(accounts);
 
-            _latestMappings = mappings;
+        // Store the latest mappings in memory
+        _latestMappings = mappings;
         return Ok(mappings);
 
     }
 
-    // Get data
+    // Get data from the uploaded file
     [HttpGet]
     public IActionResult GetLatestMappings()
     {

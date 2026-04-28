@@ -86,7 +86,7 @@ function App() {
    setMappings(updatedMappings);
  }
 
-  // Fetch movies
+  // Fetch from api when component mounts
   useEffect(() => {
     async function loadMappings() {
       const data = await getMappings();
