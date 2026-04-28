@@ -1,3 +1,4 @@
+using backend.DTOs;
 using backend.Models;
 using backend.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -42,5 +43,22 @@ public class MappingController : ControllerBase
     {
         return Ok(_latestMappings);
     }
+
+
+    // AI-suggested mapping
+    [HttpPost("ai-suggest")]
+    public async Task<IActionResult> AiSuggest(
+    [FromBody] AiMappingRequest request,
+    [FromServices] OpenAiMappingService aiService)
+{
+    var suggestion = await aiService.SuggestMapping(request);
+
+    if (suggestion == null)
+    {
+        return BadRequest("Could not generate AI suggestion.");
+    }
+
+    return Ok(suggestion);
+}
 
 }
