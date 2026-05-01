@@ -3,12 +3,13 @@
 
 ## 🧾 Overview
 
-This project is a prototype that maps a trial balance to a Norwegian standard chart of accounts using a simple assisted (rule-based) approach.
+This project is a prototype that maps a trial balance to a Norwegian standard chart of accounts using a combination of rule-based logic and AI-assisted suggestions.
 
 The solution consists of:
 
 -   **Backend (C# / .NET API)** – parses input and generates mapping suggestions
 -   **Frontend (React + TypeScript)** – displays and allows user interaction
+-   **AI (OpenAI API)** – provides intelligent mapping suggestions with confidence and explanation
 
 ----------
 
@@ -22,18 +23,22 @@ The solution consists of:
     -   account name
 
 ### Mapping (AI logic)
+The system uses two approaches:
 
--   Rule-based matching using:
+-   1. Rule-based matching using:
     -   account number
     -   account group
     -   keyword matching (e.g. bank, lønn, kunde)
 
-Each account returns:
 
--   suggested standard account
--   category
--   confidence score
--   status
+-   2. AI-assisted mapping (OpenAI)
+-   User can request AI suggestions per account
+-   AI selects the best matching account from a predefined chart of accounts
+-   Returns:
+ - - suggested account
+ - - category
+ - - confidence score
+ - - explanation ("reason")
 
 
 ----------
@@ -51,6 +56,7 @@ User can:
 
 -   change mapping (dropdown)
 -   confirm mapping
+-   request AI suggestion per row
 
 ----------
 
@@ -62,6 +68,22 @@ User can:
 -   `NeedsReview` → low confidence
 
 ----------
+
+## 🤖 AI Integration
+The system integrates with OpenAI for assisted mapping
+
+### ⚠️ Important:
+The API key is **not included in this repository.**
+It is stored locally using .NET user secrets
+
+```
+dotnet user-secrets set "OpenAI:ApiKey" "your-api-key"
+```
+
+the backend reads the key via:
+```
+_configuration["OpenAI:ApiKey"]
+```
 
 ## 🚀 Run the project
 
@@ -79,7 +101,8 @@ dotnet run
 2. Open Swagger:
    http://localhost:5272/swagger/index.html
 3. Use POST /api/Mapping to upload Excel file (accountname and accountnumber)
-4. Open frontend to view results
+4. (Optional) Use POST/api/Mapping/ai-suggest for AI testing
+5. Open frontend to view results
 ```
 <img width="1153" height="433" alt="Skjermbilde 2026-04-27 kl  23 24 15" src="https://github.com/user-attachments/assets/da9a9614-2d4f-4ecd-995d-2b49bcb31cc1" />
 
@@ -91,6 +114,12 @@ npm run dev
 press "o" to open in browser
 ```
 <img width="1136" height="459" alt="Skjermbilde 2026-04-27 kl  23 26 25" src="https://github.com/user-attachments/assets/df57ba0e-3009-4690-a0e1-8e2e4d3c6a06" />
+
+
+## 🧠 Design Notes
+- AI is used as a support tool, not a replacement for user validation
+- Mapping suggestions are always editable by the user
+- Confidence helps prioritize which accounts need review
 
 
 ----------
